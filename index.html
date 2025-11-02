@@ -59,6 +59,46 @@
       font-size: 14px;
       opacity: 0.8;
     }
+	
+	.pdf-section {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.pdf-section h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: white;
+  opacity: 0.95;
+  font-weight: 600;
+}
+
+.pdf-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+.pdf-btn {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 10px 18px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(6px);
+}
+
+.pdf-btn:hover {
+  background: white;
+  color: var(--blue);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
   </style>
 </head>
 <body>
@@ -71,6 +111,19 @@
     <a href="donateurs/page_donateur.html" class="btn-choice">Espace Donateur</a>
     <a href="porteurs/page_porteur.html" class="btn-choice">Espace Porteur de projet</a>
   </div>
+  
+  <div class="pdf-section">
+  <h2>Documents à consulter</h2>
+  <div class="pdf-buttons">
+    <a href="pdfs/ANDIC1_statuts.pdf" target="_blank" class="pdf-btn">Status juridiques</a>
+    <a href="pdfs/ANDIC3_charte.pdf" target="_blank" class="pdf-btn">Charte éthique</a>
+    <a href="pdfs/ANDIC2_reglementinterieur.pdf" target="_blank" class="pdf-btn">Règlement intérieur</a>
+    <a href="pdfs/ANDIC4_fonctionnenment_detaille.pdf" target="_blank" class="pdf-btn">Fonctionnement de la plateforme</a>
+    <a href="pdfs/ANDIC5_communication_donateurs.pdf" target="_blank" class="pdf-btn">FAQ Donateurs</a>
+    <a href="pdfs/ANDIC5_communication_porteurs.pdf" target="_blank" class="pdf-btn">FAQ Porteurs</a>
+  </div>
+</div>
+
 
   <footer>© 2025 ANDIC — Plateforme de dons culturels</footer>
 </body>
