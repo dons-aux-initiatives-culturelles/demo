@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>ANDIC – Accueil</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, var(--blue), var(--blue-2));
+      color: white;
+      text-align: center;
+    }
+    .logo-main {
+      background: linear-gradient(135deg, #f6c84c, white);
+      color: var(--blue);
+      font-size: 42px;
+      font-weight: 800;
+      border-radius: 18px;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin-bottom: 20px;
+    }
+    h1 { font-size: 36px; margin-bottom: 8px; }
+    p { max-width: 480px; margin-bottom: 40px; opacity: 0.9; }
+
+    .btns {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-choice {
+      background: white;
+      color: var(--blue);
+      padding: 16px 30px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      transition: all 0.25s ease;
+    }
+    .btn-choice:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.25);
+    }
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-main">A</div>
+  <h1>Bienvenue sur la plateforme ANDIC</h1>
+  <p>Participez à la valorisation de projets culturels et éducatifs de votre territoire.<br>
+  Choisissez votre espace :</p>
+
+  <div class="btns">
+    <a href="donateurs/page_donateur.html" class="btn-choice">Espace Donateur</a>
+    <a href="porteurs/page_porteur.html" class="btn-choice">Espace Porteur de projet</a>
+  </div>
+
+  <footer>© 2025 ANDIC — Plateforme de dons culturels</footer>
+</body>
+</html>
