@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ANDIC — Tableau de bord Porteur</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">ANDIC</div>
+      <div>
+        <div style="font-weight:800">Tableau de bord — Porteur</div>
+        <div style="font-size:13px;color:var(--muted)">Affectation des dons au projet</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="link" href="#">Mes projets</a>
+      <a class="link" href="#">Mes rapports</a>
+    </nav>
+
+    <div class="avatar">P</div>
+  </header>
+
+  <div class="container">
+
+    <!-- Project summary -->
+    <section class="main-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+        <div>
+          <h2 style="margin:0">Projet — "Création : Soleil Levant"</h2>
+          <div class="small muted">Structure : Théâtre du Soleil Levant — Statut : <strong>En phase d'allocation</strong></div>
+        </div>
+        <div style="text-align:right">
+          <div class="small muted">Budget total</div>
+          <div style="font-weight:800;font-size:22px" id="projectCost">1 750 €</div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Levels table -->
+    <section class="main-card" style="margin-top:6px">
+      <h3 style="margin-top:0">Dons disponibles par niveau (moyenne par projet)</h3>
+      <p class="small muted">Ajustez la part que vous demandez pour ce projet. Les curseurs sont exprimés en % par rapport à la moyenne disponible, dans la limite du plafond disponible pour ce niveau. Ce plafond est de +15% de la moyenne des dons dès lors qu'il y a 8 projets ou plus à ce niveau territorial. Ce plafond est abaissé à +10% pour 5 à 7 projets, +5% pour 3 à 4 projets, et +0%  pour 1 à 2 projets.</p>
+
+      <div id="levelsContainer" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+        <!-- JS injectera les lignes ici -->
+      </div>
+
+      <!-- composition summary -->
+      <div style="margin-top:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1">
+          <div class="stack" id="stackBar" aria-hidden="true"></div>
+          <div class="percent-row" style="margin-top:8px">
+            <div style="font-size: 2.4rem">Total affecté : <strong id="totalAllocated" >1 675 €</strong></div>
+            <div id="percentMsg" style="font-size: 1.8rem"></div>
+          </div>
+        </div>
+
+        <div style="width:320px">
+          <div style="margin-top:10px;display:flex;gap:8px">
+            <button id="btnAuto" class="btn outline">Remplissage auto</button>
+            <button id="btnValidate" class="btn primary" disabled>Valider l'affectation</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bonus / history -->
+    <section class="main-card" style="margin-top:16px">
+      <h3 style="margin-top:0">Bonus / Malus historique</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:2;min-width:300px">
+          <div class="small muted">Historique (années récentes)</div>
+          <div id="historyList" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
