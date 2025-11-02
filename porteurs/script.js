@@ -25,8 +25,8 @@ const levels = [
   //{ key: 'establishment_7814', type: 'Establishment', label: 'Ecole de musique - Mr. Bonhomme', total: 500, projects: 7 },
   { key: 'commune', type: 'Commune', label: 'Douai', total: 950, projects: 22 },
   //{ key: 'commune_59552', type: 'Commune', label: 'Lambres-lez-douai', total: 950, projects: 22 },
-  { key: 'commu', type: 'Communauté de communes', label: 'Douaisi agglo', total: 4730, projects: 52 },
-  { key: 'dept_59', type: 'Département', label: 'Nord-pas-de-calais', total: 17520, projects: 428 },
+  { key: 'commu', type: 'Communauté de communes', label: 'Douaisis agglo', total: 4730, projects: 52 },
+  { key: 'dept_59', type: 'Département', label: 'Nord', total: 17520, projects: 428 },
   { key: 'region_hdf', type: 'Région', label: 'Haut-de-France', total: 49500, projects: 907 },
   { key: 'country_fr', type: 'Pays', label: 'France', total: 128000, projects: 1242 }
 ];
@@ -415,3 +415,4 @@ function renderHistory(){
 
 // ---------- start ----------
 initUI();
+
