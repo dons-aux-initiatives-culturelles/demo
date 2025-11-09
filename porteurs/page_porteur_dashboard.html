@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ANDIC — Tableau de bord porteur</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="porteur_dashboard.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">ANDIC</div>
+      <div>
+        <div style="font-weight:800">Espace porteur</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.85)">Tableau de bord de mes projets</div>
+      </div>
+    </div>
+    <div class="avatar">P</div>
+  </header>
+
+<div class="alert-banner">
+  ⚠️ Cette page fait partie d’une <strong>version de démonstration</strong> de la plateforme ANDIC.  
+  Elle n’est pas encore fonctionnelle.  
+  Nous recherchons des contributeurs pour la développer — contactez-nous : 
+  <a href="mailto:contact@andic.org">contact.andic@free.fr</a>
+</div>
+
+  <div class="container">
+
+    <!-- établissement -->
+    <section class="main-card">
+      <h2 style="margin-top:0">MJC de Lambres-lez-Douai</h2>
+      <div class="small muted">Adresse : 43 rue du Maréchal Leclerc, 59552 Lambres-lez-Douai</div>
+      <div class="territ-info">
+        <div><strong>Commune :</strong> Lambres-Lez-Douai</div>
+        <div><strong>Com. de communes :</strong> Douais Agglo</div>
+        <div><strong>Département :</strong> Nord (59)</div>
+        <div><strong>Région :</strong> Hauts-de-France</div>
+        <div><strong>Pays :</strong> France</div>
+      </div>
+    </section>
+
+    <!-- Bonus/Malus -->
+    <section class="main-card">
+      <h3 style="margin-top:0">Bonus / Malus par échelle</h3>
+	  <div class="info-box">
+  <strong>Note :</strong> Afin de garantir <em>fluidité</em> d'attribution et <em>équité</em> entre les différents porteurs de projets, un <em>bonus/malus</em> est calculé à chaque échelle territoriale, selon l'historique des affectations de dons que vous avez plébisictés par le passé. 
+  <br><br>
+  Un <strong>bonus</strong> indique que vous avez globalement sollicité <em>moins</em> de la moyenne de dons disponibles par projets. Un <strong>malus</strong> indique que vous avez sollicité <em>plus</em> que la moyenne.
+  <br><br>
+  Ce bonus/malus affecte la <em>somme maximale</em> que vous pouvez demander pour financer un nouveau projet.
+</div>
+      <div class="territ-row">
+        <div class="territ-card">
+          <div class="title">Commune</div>
+          <div class="value bonus">+3%</div>
+        </div>
+        <div class="territ-card">
+          <div class="title">Com. de communes</div>
+          <div class="value neutral">0%</div>
+        </div>
+        <div class="territ-card">
+          <div class="title">Département</div>
+          <div class="value malus">−2%</div>
+        </div>
+        <div class="territ-card">
+          <div class="title">Région</div>
+          <div class="value bonus">+1%</div>
+        </div>
+        <div class="territ-card">
+          <div class="title">Pays</div>
+          <div class="value neutral">0%</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Liste des projets -->
+    <section class="main-card">
+      <h3 style="margin-top:0">Mes projets</h3>
+      <div id="projectsList" class="projects-grid"></div>
+    </section>
+
+  </div>
+
+  <script src="porteur_dashboard.js"></script>
+</body>
+</html>

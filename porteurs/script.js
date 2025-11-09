@@ -25,21 +25,31 @@ const levels = [
   //{ key: 'establishment_7814', type: 'Establishment', label: 'Ecole de musique - Mr. Bonhomme', total: 500, projects: 7 },
   { key: 'commune', type: 'Commune', label: 'Douai', total: 950, projects: 22 },
   //{ key: 'commune_59552', type: 'Commune', label: 'Lambres-lez-douai', total: 950, projects: 22 },
-  { key: 'commu', type: 'Communauté de communes', label: 'Douaisis agglo', total: 4730, projects: 52 },
-  { key: 'dept_59', type: 'Département', label: 'Nord', total: 17520, projects: 428 },
+  { key: 'commu', type: 'Communauté de communes', label: 'Douaisi agglo', total: 4730, projects: 52 },
+  { key: 'dept_59', type: 'Département', label: 'Nord-pas-de-calais', total: 17520, projects: 428 },
   { key: 'region_hdf', type: 'Région', label: 'Haut-de-France', total: 49500, projects: 907 },
   { key: 'country_fr', type: 'Pays', label: 'France', total: 128000, projects: 1242 }
 ];
 
 
-// one bonus history and cumulated per level
+// Base malus/bonus values (these mirror the figures shown on the porteur dashboard)
+const baseMaluses = {
+  commune: 3,        // +3%
+  commu: 0,          // 0
+  dept_59: -2,          // -2%
+  region_hdf: 1,         // +1%
+  country_fr: 0         // 0%
+};
+
+// Initialize per-level structure with base values
 let levelMaluses = {};
 levels.forEach(l => {
   levelMaluses[l.key] = {
-    history: [],  // list of {year, delta}
-    cumulated: 0  // sum of deltas
+    history: [{ year: 2025, delta: baseMaluses[l.key] || 0 }], // first entry from dashboard
+    cumulated: baseMaluses[l.key] || 0
   };
 });
+
 
 
 
@@ -415,4 +425,3 @@ function renderHistory(){
 
 // ---------- start ----------
 initUI();
-

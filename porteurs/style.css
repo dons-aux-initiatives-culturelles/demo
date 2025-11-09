@@ -164,3 +164,28 @@ body{
   .don-grid{grid-template-columns:1fr}
   .nav{display:none}
 }
+
+
+
+/* --- Bandeau d’alerte démonstration --- */
+.alert-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #b91c1c, #dc2626);
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.alert-banner a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.alert-banner a:hover {
+  text-decoration: none;
+}
