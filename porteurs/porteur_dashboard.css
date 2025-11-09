@@ -1,3 +1,187 @@
+/* style.css — Prototype tableau de bord donateur ANDIC */
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --blue:#1e3a8a;
+  --blue-2:#5b7bd5;
+  --accent:#ffcc66;
+  --muted:#6b7280;
+  --success:#16a34a;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background:var(--bg);
+  color:#0f1724;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:16px 28px;
+  background:linear-gradient(90deg,var(--blue),#2f4b8a);
+  color:white;
+  justify-content:space-between;
+}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:56px;height:56px;border-radius:10px;
+  background:linear-gradient(135deg,#2b6cb0,#f6c84c);
+  display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+.brand-text .title{font-weight:700}
+.brand-text .subtitle{font-size:13px;opacity:0.9}
+.nav{display:flex;align-items:center;gap:10px}
+.link{color:rgba(255,255,255,0.95);text-decoration:none;padding:8px 10px;border-radius:8px}
+.link:hover{background:rgba(255,255,255,0.06)}
+.avatar{width:44px;height:44px;border-radius:44px;background:white;color:var(--blue);display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* Container */
+.container{max-width:1200px;margin:24px auto;padding:0 18px}
+
+/* synth cards */
+.synth{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.card.small{background:var(--card);border-radius:12px;padding:14px 16px;flex:1;min-width:200px;box-shadow:0 6px 18px rgba(12,22,42,0.04)}
+.label{font-size:13px;color:var(--muted)}
+.value{font-size:20px;font-weight:700;margin-top:6px}
+
+/* main card */
+.main-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 10px 30px rgba(12,22,42,0.06);margin-bottom:18px}
+.muted{color:var(--muted)}
+.don-grid{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:12px}
+.panel{background:transparent;padding:0}
+
+/* input amount */
+.field-label{font-weight:600;margin-bottom:6px;display:block}
+.money-row{display:flex;gap:12px;align-items:center}
+.money-row input[type=number]{font-size:20px;padding:10px 12px;border-radius:8px;border:1px solid #e6eef9;width:160px}
+.tax{margin-left:auto;color:var(--muted)}
+
+/* divider */
+.divider{margin-top:14px;font-weight:600;color:var(--blue);margin-bottom:8px}
+
+/* sliders */
+.sliders{display:flex;flex-direction:column;gap:10px}
+.slider-row{display:flex;align-items:center;gap:10px;background:#fbfdff;padding:8px;border-radius:10px}
+.slider-row label{width:160px;font-weight:600}
+.slider-row input[type=range]{flex:1}
+.slider-row .pct{width:56px;text-align:right;font-weight:700}
+.slider-row .euro{width:85px;text-align:right;color:var(--muted);font-size:14px}
+
+/* controls */
+.controls{display:flex;gap:8px;margin-bottom:8px}
+.btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:700}
+.btn.primary{background:var(--accent);color:var(--blue)}
+.btn.outline{background:transparent;border:1px solid #dbe8ff;color:var(--blue)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px dashed #e6eef9}
+.small{font-size:13px}
+
+/* summary */
+.summary h3{margin:0 0 8px}
+.stack{height:28px;background:#eef4ff;border-radius:8px;display:flex;overflow:hidden;margin-bottom:10px}
+.stack-seg{height:100%;transition:all .4s}
+.percent-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.calc-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.calc-line{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:8px;border-radius:8px;border:1px solid #f0f6ff}
+
+/* actions */
+.actions{display:flex;gap:10px;margin-top:10px}
+.btn[disabled]{opacity:0.5;cursor:not-allowed}
+
+/* selected projects */
+.selected-list{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.project-card{background:#fff;border-radius:10px;padding:8px;display:flex;gap:8px;align-items:center;border:1px solid #f0f6ff}
+.project-card .meta{flex:1}
+.project-card .meta .title{font-weight:700}
+.project-card .meta .sub{font-size:13px;color:var(--muted)}
+.project-card .remove{background:transparent;border:none;color:#e53e3e;font-weight:700;cursor:pointer}
+
+/* modal search */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,6,23,0.45);z-index:60}
+.modal.hidden{display:none}
+.modal-inner{width:720px;background:white;border-radius:12px;padding:18px;box-shadow:0 30px 80px rgba(2,6,23,0.4);position:relative}
+.modal-close{position:absolute;right:12px;top:10px;border:none;background:transparent;font-size:18px;cursor:pointer}
+.search-row{display:flex;gap:8px;margin-bottom:12px}
+.search-row input{flex:1;padding:10px;border-radius:8px;border:1px solid #e6eef9}
+.results{max-height:360px;overflow:auto;display:grid;grid-template-columns:1fr;gap:8px}
+.result-item{display:flex;gap:10px;align-items:center;padding:10px;border-radius:8px;border:1px solid #f0f6ff}
+.result-item img{width:64px;height:48px;object-fit:cover;border-radius:6px}
+.result-item .meta{flex:1}
+.add-btn{padding:8px 10px;border-radius:8px;border:none;background:var(--blue);color:white;cursor:pointer}
+
+
+
+
+/* map search */
+#mapSection {
+  margin-top: 2em;
+  background: #f9fafc;
+  padding: 1em;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#map {
+  height: 500px;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+
+
+/* history */
+.history-list{display:flex;flex-direction:column;gap:10px}
+.history-item{background:white;padding:12px;border-radius:10px;border:1px solid #f0f6ff;display:flex;justify-content:space-between;align-items:center}
+.history-item .left{display:flex;flex-direction:column}
+.history-item .date{font-weight:700}
+.history-item .small{color:var(--muted)}
+.history-item button{padding:6px 10px;border-radius:8px;border:none;background:var(--blue);color:white;cursor:pointer}
+
+/* footer */
+.footer{max-width:1200px;margin:26px auto;padding:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+
+/* responsive */
+@media (max-width:980px){
+  .don-grid{grid-template-columns:1fr}
+  .nav{display:none}
+}
+
+
+
+
+
+/* --- Bandeau d’alerte démonstration --- */
+.alert-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #b91c1c, #dc2626);
+  color: #fff;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.alert-banner a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.alert-banner a:hover {
+  text-decoration: none;
+}
+
+
 /* porteur_dashboard.css — Styles spécifiques au tableau de bord porteur */
 
 /* Territoire établissement */
