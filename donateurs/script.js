@@ -79,16 +79,38 @@ function init(){
   q("#projFilter").addEventListener("change", renderProjectResults);
 
   // autoFill default
-  q("#autoFill").addEventListener("click", ()=> {
-    territorialLevels.forEach(l=> {
-      slidersState[l.key] = l.default;
-      const range = document.querySelector(`input[data-key="${l.key}"]`);
-      range.value = l.default;
-      range.nextElementSibling.querySelector(".pct-val").textContent = l.default;
-      range.parentElement.querySelector(".euro").textContent = fmt(l.default/100*currentAmount);
-    });
-    updateSummary();
+q("#autoFill").addEventListener("click", ()=> {
+  // count total “items”: territorial levels + selected projects
+  const allItems = [...territorialLevels, ...selectedProjects];
+  if (allItems.length === 0) return;
+
+  const share = Math.floor(100 / allItems.length);
+  let remaining = 100-share*allItems.length;
+
+  // reset all percentages
+  territorialLevels.forEach(l => {
+    const val = share;
+    slidersState[l.key] = val;
+    //remaining -= val;
+    const range = document.querySelector(`input[data-key="${l.key}"]`);
+    if (range) {
+      range.value = val;
+      range.nextElementSibling.querySelector(".pct-val").textContent = val;
+      range.parentElement.querySelector(".euro").textContent = fmt(val/100*currentAmount);
+    }
   });
+
+  selectedProjects.forEach((sp, i) => {
+    // distribute remaining to avoid rounding loss
+    let val = share;
+    //if (i === selectedProjects.length - 1) val += remaining;
+    sp.pct = val;
+    sp.amount = Math.round(val/100*currentAmount);
+  });
+
+  renderSelectedProjects(); // refresh sliders of projects
+  updateSummary();
+});
 
   // validation
   q("#btnValidate").addEventListener("click", submitDonation);
@@ -104,18 +126,33 @@ function onAmountChange(e){
   let v = parseFloat(input.value) || 0;
   if(v < 1) v = 1;
   currentAmount = v;
+
   // update tax estimation (66% reduction)
-  const net = Math.round(v*(1-0.66));
+  const net = Math.round(v * (1 - 0.66));
   q("#netCost").textContent = fmt(net);
-  // update euro columns for territorial sliders
-  qa("#territorySliders .slider-row").forEach(row=>{
+
+  // update euro values for territorial sliders
+  qa("#territorySliders .slider-row").forEach(row => {
     const range = row.querySelector('input[type=range]');
     const pct = parseFloat(range.value);
-    row.querySelector(".euro").textContent = fmt(pct/100*currentAmount);
+    row.querySelector(".euro").textContent = fmt(pct / 100 * currentAmount);
   });
-  // update project euro displays
+
+  // 🔧 update euro values for each selected project
+  selectedProjects.forEach(sp => {
+    sp.amount = Math.round(sp.pct / 100 * currentAmount);
+    // find corresponding displayed card
+    const card = document.querySelector(`.project-card input[data-project="${sp.id}"]`);
+    if (card) {
+      const euroDiv = card.parentElement.querySelector('div[style*="color:var(--muted)"]');
+      if (euroDiv) euroDiv.textContent = fmt(sp.amount);
+    }
+  });
+
+  // finally update the global summary & totals
   updateSummary();
 }
+
 
 function onTerritoryChange(e){
   const key = e.target.dataset.key;
@@ -197,7 +234,7 @@ function renderSelectedProjects(){
       <div class="meta">
         <div class="title">${p.title}</div>
         <div class="sub">${p.location} • Budget ${fmt(p.budget)}</div>
-        <div style="margin-top:6px;display:flex;gap:8px;align-items:center">
+        <div class="slider-row">
           <input type="range" min="0" max="75" value="${sp.pct}" data-project="${sp.id}">
           <div style="width:48px;text-align:right;font-weight:700">${sp.pct}%</div>
           <div style="width:90px;text-align:right;color:var(--muted)">${fmt(sp.amount)}</div>
