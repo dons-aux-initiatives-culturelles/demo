@@ -18,17 +18,17 @@ let donationsHistory = [
 
 // ---------- Configuration ----------
 const territorialLevels = [
-  { key:"commune", label:"Ma commune", min:5, max:75, default:20, color:"#5b7bd5" },
-  { key:"commu",   label:"Ma communauté de communes", min:5, max:75, default:20, color:"#4070d6" },
-  { key:"dept",    label:"Mon département", min:5, max:75, default:20, color:"#2b55c0" },
-  { key:"region",  label:"Ma région", min:5, max:75, default:20, color:"#1e3a8a" },
-  { key:"country", label:"Mon pays", min:5, max:75, default:20, color:"#16325f" },
+  { key:"commune", label:"Ma commune", projects: 4, min:5, max:75, default:20, color:"#5b7bd5" },
+  { key:"commu",   label:"Ma communauté de communes", min:5, projects: 23, max:75, default:20, color:"#4070d6" },
+  { key:"dept",    label:"Mon département", projects: 188, min:5, max:75, default:20, color:"#2b55c0" },
+  { key:"region",  label:"Ma région", projects: 478, min:5, max:75, default:20, color:"#1e3a8a" },
+  { key:"country", label:"Mon pays", projects: 5786, min:5, max:75, default:20, color:"#16325f" },
 ];
 
 // runtime state
 let selectedProjects = []; // {id, pct}
 let slidersState = {}; // percent values for each level & projects
-let currentAmount = 100;
+let currentAmount = 120;
 
 // ---------- Helpers ----------
 const q = sel => document.querySelector(sel);
@@ -44,13 +44,22 @@ function init(){
   const container = q("#territorySliders");
   territorialLevels.forEach(level=>{
     const row = document.createElement("div");
-    row.className = "slider-row";
+    row.className = "project-card";
     row.innerHTML = `
-      <label title="${level.label}">${level.label}</label>
-      <input type="range" min="${level.min}" max="${level.max}" value="${level.default}" data-key="${level.key}">
-      <div class="pct"><strong><span class="pct-val">${level.default}</span>%</strong></div>
-      <div class="euro">${fmt(level.default/100*currentAmount)}</div>
-    `;
+	<div class="meta">
+        <div class="slider-row">
+  <div style="display:flex; flex-direction:column; width:250px;">
+    <label title="${level.label}" style="font-weight:600;">${level.label}</label>
+    <small class="muted" style="font-size:12px; color:var(--muted);">
+      ${level.projects || 0} projets
+    </small>
+  </div>
+  <input type="range" min="${level.min}" max="${level.max}" value="${level.default}" data-key="${level.key}">
+  <div class="pct"><strong><span class="pct-val">${level.default}</span>%</strong></div>
+  <div class="euro">${fmt(level.default/100*currentAmount)}</div>
+  </div>
+  </div>
+`;
     container.appendChild(row);
     slidersState[level.key] = level.default;
   });
@@ -144,7 +153,8 @@ function onAmountChange(e){
     // find corresponding displayed card
     const card = document.querySelector(`.project-card input[data-project="${sp.id}"]`);
     if (card) {
-      const euroDiv = card.parentElement.querySelector('div[style*="color:var(--muted)"]');
+      //const euroDiv = card.parentElement.querySelector('div[style*="color:var(--muted)"]');
+	  const euroDiv = card.parentElement.querySelector('.euro');
       if (euroDiv) euroDiv.textContent = fmt(sp.amount);
     }
   });
@@ -206,8 +216,12 @@ function addProjectById(id){
   if(selectedProjects.find(s=>s.id===id)) return;
   const p = sampleProjects.find(x=>x.id===id);
   if(!p) return;
-  // default percent 0
-  selectedProjects.push({ id:p.id, title:p.title, pct:0, amount:0 });
+  
+  // default percent = 5%
+  const pct = 5;
+  const amount = Math.round(pct / 100 * currentAmount);
+
+  selectedProjects.push({ id:p.id, title:p.title, pct:5, amount:amount });
   renderSelectedProjects();
   updateSummary();
 }
@@ -230,17 +244,23 @@ function renderSelectedProjects(){
     const card = document.createElement("div");
     card.className = "project-card";
     card.innerHTML = `
-      <div style="width:64px;height:48px;background:#f0f4ff;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--blue)">${p.location}</div>
       <div class="meta">
-        <div class="title">${p.title}</div>
-        <div class="sub">${p.location} • Budget ${fmt(p.budget)}</div>
         <div class="slider-row">
-          <input type="range" min="0" max="75" value="${sp.pct}" data-project="${sp.id}">
-          <div style="width:48px;text-align:right;font-weight:700">${sp.pct}%</div>
-          <div style="width:90px;text-align:right;color:var(--muted)">${fmt(sp.amount)}</div>
+			<div style="display:flex; flex-direction:column; width:250px;">
+			<label title="${p.title}">${p.title}</label>
+			<small class="muted" style="font-size:12px; color:var(--muted);">
+			  ${p.location} • Budget ${fmt(p.budget)}
+			<button class="remove" data-rm="${sp.id}">✕</button>
+			</small>
+		</div>		  
+		<input type="range" min="5" max="75" value="${sp.pct}" data-project="${sp.id}">
+		<div class="pct"><strong><span class="pct-val">${sp.pct}</span>%</strong></div>
+		<div class="euro">${fmt(sp.amount)}</div>
+	  
         </div>
       </div>
-      <button class="remove" data-rm="${sp.id}">✕</button>
+	  
+	  
     `;
     container.appendChild(card);
     // bind remove
@@ -252,7 +272,9 @@ function renderSelectedProjects(){
       sp.pct = val;
       sp.amount = Math.round(val/100*currentAmount);
       e.target.nextElementSibling.textContent = val + "%";
-      e.target.parentElement.querySelector('div[style*="color:var(--muted)"]').textContent = fmt(sp.amount);
+	  const euroDiv = e.target.parentElement.querySelector('.euro');
+	  if (euroDiv) euroDiv.textContent = fmt(sp.amount);
+      //e.target.parentElement.querySelector('div[style*="color:var(--muted)"]').textContent = fmt(sp.amount);
       updateSummary();
     });
   });
@@ -272,18 +294,21 @@ function updateSummary(){
   selectedProjects.forEach(sp=>{
     totalPct += sp.pct || 0;
   });
+  
+  const totalAmount = Math.round(totalPct / 100 * currentAmount);
 
   // update UI total
   q("#totalPercent").textContent = totalPct + "%";
+  q("#totalAmount").textContent = fmt(totalAmount);
   const msg = q("#percentMsg");
   if(totalPct === 100){
     msg.textContent = "Répartition complète.";
     msg.style.color = "";
   } else if(totalPct < 100){
-    msg.textContent = `Il manque ${100-totalPct}% à répartir.`;
+    msg.textContent = `Il manque ${100-totalPct}% soit ${fmt(Math.round((100-totalPct) / 100 * currentAmount))} à répartir — ajustez vos curseurs.`;
     msg.style.color = "#e67e22";
   } else {
-    msg.textContent = `Surcharge de ${totalPct-100}% — ajustez vos curseurs.`;
+    msg.textContent = `Surcharge de ${totalPct-100}% soit ${fmt(Math.round((totalPct-100) / 100 * currentAmount))} — ajustez vos curseurs.`;
     msg.style.color = "#e53e3e";
   }
 
@@ -311,6 +336,7 @@ function updateSummary(){
   });
 
   // list of amounts
+  /*
   const amountList = q("#amountList");
   amountList.innerHTML = "";
   territorialLevels.forEach(l=>{
@@ -327,7 +353,7 @@ function updateSummary(){
       line.innerHTML = `<div>${sp.title} <small class="muted">${sp.pct}%</small></div><div><strong>${fmt(sp.pct/100*currentAmount)}</strong></div>`;
       amountList.appendChild(line);
     });
-  }
+  }*/
 
   // compute project.amount values
   selectedProjects.forEach(sp=>{

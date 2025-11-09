@@ -55,7 +55,12 @@ body{
 /* main card */
 .main-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 10px 30px rgba(12,22,42,0.06);margin-bottom:18px}
 .muted{color:var(--muted)}
-.don-grid{display:grid;grid-template-columns:1fr 420px;gap:18px;margin-top:12px}
+/*.don-grid{display:b;grid-template-columns:1fr 420px;gap:18px;margin-top:12px}*/
+.don-grid {
+  display: block; /* ou flex en colonne */
+  width: 100%;
+  margin-top: 12px;
+}
 .panel{background:transparent;padding:0}
 
 /* input amount */
@@ -70,7 +75,8 @@ body{
 /* sliders */
 .sliders{display:flex;flex-direction:column;gap:10px}
 .slider-row{display:flex;align-items:center;gap:10px;background:#fbfdff;padding:8px;border-radius:10px}
-.slider-row label{width:160px;font-weight:600}
+.sliderinner{display:flex; flex-direction:column; width:160px;}
+.slider-row label{width:250px;font-weight:600}
 .slider-row input[type=range]{flex:1}
 .slider-row .pct{width:56px;text-align:right;font-weight:700}
 .slider-row .euro{width:85px;text-align:right;color:var(--muted);font-size:14px}
@@ -92,7 +98,7 @@ body{
 .calc-line{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:8px;border-radius:8px;border:1px solid #f0f6ff}
 
 /* actions */
-.actions{display:flex;gap:10px;margin-top:10px}
+.actions{display:flex;gap:10px;margin-top:10px;justify-content: center}
 .btn[disabled]{opacity:0.5;cursor:not-allowed}
 
 /* selected projects */
