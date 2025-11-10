@@ -6,7 +6,7 @@ const sampleProjects = [
   { id:1, title:"MJC - Atelier théâtre", location:"Grenoble", type:"mjc", budget:3800, raised:3200, thumb:"https://via.placeholder.com/120x80" },
   { id:2, title:"Théâtre municipal - Création", location:"Nantes", type:"theatre", budget:6500, raised:4200, thumb:"https://via.placeholder.com/120x80" },
   { id:3, title:"École de musique - Matériel", location:"Lyon", type:"musique", budget:3800, raised:3200, thumb:"https://via.placeholder.com/120x80" },
-  { id:4, title:"Renovation patrimoine - Chapelle", location:"Bordeaux", type:"patrimoine", budget:12000, raised:7500, thumb:"https://via.placeholder.com/120x80" },
+  { id:4, title:"Réhabilitation - La Maison des arts et idées ", location:"Bordeaux", type:"patrimoine", budget:12000, raised:7500, thumb:"https://via.placeholder.com/120x80" },
   { id:5, title:"Festival local - scène", location:"Le Mans", type:"musique", budget:9000, raised:6300, thumb:"https://via.placeholder.com/120x80" }
 ];
 
@@ -529,5 +529,6 @@ init();
 renderSelectedProjects();
 updateSummary();
 initMap(); // 🗺️ Initialise la carte à la fin
+
 
 
