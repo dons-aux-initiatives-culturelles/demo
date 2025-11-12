@@ -189,3 +189,73 @@ body{
 .alert-banner a:hover {
   text-decoration: none;
 }
+
+
+/* --- Section documents projet --- */
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.doc-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(12,22,42,0.05);
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #eef2ff;
+  transition: all 0.2s ease-in-out;
+}
+
+.doc-card.valid:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(12,22,42,0.1);
+}
+
+.doc-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  color: var(--blue);
+}
+
+.doc-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.doc-link {
+  font-size: 13px;
+  color: var(--blue-2);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.doc-link:hover {
+  text-decoration: none;
+}
+
+.doc-card.valid {
+  border-left: 4px solid var(--success);
+}
+
+.doc-card.pending {
+  border: 2px dashed #d1d5db;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.doc-status {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* Adaptation mobile */
+@media (max-width: 720px) {
+  .docs-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
