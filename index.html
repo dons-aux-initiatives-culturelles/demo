@@ -100,6 +100,59 @@
   transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
+
+    /* Section Podcast */
+    .podcast-section {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .podcast-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .podcast-btn:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .podcast-btn::before {
+      content: "🎧";
+      font-size: 20px;
+    }
+    .audio-player {
+      margin-top: 20px;
+      display: none;
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.25);
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .audio-player.active {
+      display: block;
+    }
+    audio {
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+    audio::-webkit-media-controls-panel {
+      background-color: rgba(255,255,255,0.9);
+    }
   </style>
 </head>
 <body>
@@ -116,6 +169,16 @@
     <a href="porteurs/page_porteur_dashboard.html" class="btn-choice">Espace Porteur de projet</a>
   </div>
   
+<div class="podcast-section">
+    <button class="podcast-btn" onclick="togglePodcast()">Écouter le Podcast</button>
+    <div class="audio-player" id="audioPlayer">
+        <p style="margin: 0 0 10px 0; font-weight: 600;">Podcast ANDIC</p>
+        <audio controls id="podcastAudio">
+            <source src="./podcast.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas la lecture audio.
+        </audio>
+    </div>
+</div>
   
   <div class="pdf-section">
   <h2>Documents à consulter</h2>
@@ -140,6 +203,27 @@
 </div>
 
   <footer>© 2025 ANDIC — Plateforme de dons culturels</footer>
+  
+<script>
+function togglePodcast() {
+  const player = document.getElementById('audioPlayer');
+  const audio = document.getElementById('podcastAudio');
+
+  // 1. On bascule l'affichage visuel
+  player.classList.toggle('active');
+
+  // 2. On gère la lecture
+  if (player.classList.contains('active')) {
+    // On tente de jouer le son
+    audio.play().catch(function(error) {
+      console.error("Lecture impossible :", error);
+      alert("Erreur : Le fichier 'podcast.mp3' est introuvable ou illisible.");
+    });
+  } else {
+    audio.pause();
+    audio.currentTime = 0; // Remet au début quand on ferme
+  }
+}
+</script>
 </body>
 </html>
-
