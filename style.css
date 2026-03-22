@@ -147,7 +147,13 @@ body{
 
 /* footer */
 .footer{max-width:1200px;margin:26px auto;padding:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-
+.counter {
+  margin-top: 8px;
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
 /* responsive */
 @media (max-width:980px){
   .don-grid{grid-template-columns:1fr}
